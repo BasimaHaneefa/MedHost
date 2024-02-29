@@ -1,0 +1,32 @@
+{% extends 'Laboratory/Head.html' %}
+{% load static %}
+<html>
+    <title>Edit Profile Laboratory</title>
+    <body>
+        {% block content %}
+
+        <br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Edit Profile</h1><br>
+        <form method="post" enctype="multipart/form-data" id="UserForm" >
+            {% csrf_token %}
+            <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+        
+               <tr><td>Name</td>
+                <td><input type="text" name="name" autocomplete="off" required="" value="{{User.name}}"></td></tr>
+                <tr><td>Contact</td>
+                <td><input type="text" name="contact" autocomplete="off" required="" value="{{User.contact}}"></td></tr>
+                </tr><td>Email</td>
+                <td><input type="email" name="email" autocomplete="off" required="" value="{{User.email}}"></td></tr>
+                <tr><td>Address</td>
+                <td><textarea name="address" autocomplete="off" required="">{{User.address}}</textarea></td></tr>
+                <tr><td align="center" colspan=2><input type="submit" name="btn" value="Update">
+                    <input type="submit" name="btn" value="Cancel"></td>
+                    </tr>
+                </table>
+            </div>
+           </form>
+           <br><br>
+    </body>
+    </html>
+    {% endblock content %}

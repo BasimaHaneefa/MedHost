@@ -1,0 +1,32 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>'
+    <head>
+    <title>Department Registration</title>
+    </head>
+    <body>
+        {% block content %}
+        <br><br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Add Slots</h1><br><br>
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr><td>Date</td>
+            <td><input type="date" name="date" autocomplete="off" required=""></td>
+            </tr>
+            <tr>
+                <td>Count</td>
+                <td><input type="text" name="count" autocomplete="off" required=""></td>
+            </tr>
+            <tr>
+                <td align="center" colspan=2><input type="submit" name="btn" value="Save">
+                <input type="submit" name="btn" value="Cancel"></td>
+             </tr>
+            
+            </table>
+        </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            
+        </body>
+        </html>
+        {% endblock content %}

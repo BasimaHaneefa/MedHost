@@ -1,0 +1,41 @@
+{% extends 'Doctor/Head.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   {% block content %}
+    
+    <br><br>
+    <div id="tab">
+        <br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">View Referals</h1><br>
+    <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+        <tr><td>User Name</td>
+            <td>Appoinment Date</td>
+             <td>Appoinment Time</td>
+             <td>Refered From</td>
+             <td>Action</td>
+        </tr>
+        {%for i in sel %}
+        <tr>
+            <td>{{i.appoinment_id.User_id.name}}</td> 
+            <td>{{i.appoinment_id.for_date}}
+            <td>{{i.appoinment_id.appoinment_time}}</td>
+            <td>{{i.appoinment_id.doctor_id.name}}</td>
+            <td><a href="{% url 'doctor:checkupdetails' i.id %}">Checkup Details</a> | <a href="{% url 'doctor:view_checkup' i.id %}">View Checkup Details</a> |
+            <a href="{% url 'doctor:prescription' i.id%}">Add Prescription</a> | <a href="{% url 'doctor:reference' i.id%}">Refer</a></td>
+        </tr>       
+            {%endfor%}
+
+        </table>
+        <br><br><br>
+    </div>
+        {% endblock content %}
+</body>
+</html>

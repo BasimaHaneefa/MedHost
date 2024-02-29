@@ -1,0 +1,46 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>Department Registration</title>
+    <body><br>
+        {% block content %}
+        <br><br><br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Department Registration</h1><br>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div id="tab">
+               <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr>
+                    <td>Department</td>
+                    <td><input type="text" name="department" autocomplete="off" required="">
+                    </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" name="btn" value="Save">
+                        <input type="submit" name="btn"value="Cancel"></td>
+                    </tr>
+            </table>
+        </div>
+            <br><br>
+            <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Department</th>
+                    <th colspan=2><center>Action</center></th>
+                </tr>
+                {%for i in dep%}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.department}}</td>
+                    <td><a href="{% url 'webadmin:Dlt_Dep' i.id %}">Delete</a> |
+                    <a href="{% url 'webadmin:Up_Dep' i.id %}">Update</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        </form>
+        <br><br><br><br><br><br><br><br>
+        {% endblock content %}
+    </body>
+</html>

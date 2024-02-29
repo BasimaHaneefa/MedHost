@@ -1,0 +1,36 @@
+{% extends 'Laboratory/Head.html' %}
+{% load static %}
+<html>
+    <title>Description</title>
+    <body>
+        {% block content %}<br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">FEEDBACK</h1><br>
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <div id="tab">
+             <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr><td>Description</td>
+                <td><textarea name="description" autocomplete="off" required="" rows="4" cols="30"></textarea></td></tr>
+            <tr>
+        <td align="center" colspan="2"><input type="submit" name="btn" value="Send">
+        <input type="submit" name="btn" value="Cancel"></td>
+     </tr>
+</table>
+</div>
+<br><br>
+<div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr>
+                    <th>Description</th>
+                </tr>
+                {%for i in seld %}
+                <tr>
+                    <td>{{i.description}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+</form><br><br><br>
+</body>
+</html>
+{% endblock content %}

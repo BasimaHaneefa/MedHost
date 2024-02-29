@@ -1,0 +1,78 @@
+
+{% extends 'Admin/Head.html' %}
+{% load static %}<html>
+    <title>View Complaint</title>
+    <body>
+        {% block content %}
+        <br><br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">View Feedbacks</h1><br><br>
+
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <th colspan=5 align="center"><center> Doctor Complaint</center></th>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Content</th>
+
+                </tr>
+                {%for i in seld %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.Doctor_id.name}}</td>
+                   <td>{{i.description}}</td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+
+            <br><br>
+            <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <th colspan=5><center> Laboratory Complaint</center></th>
+                <tr>
+                    <th>Sl.No</th>
+
+                    <th>Title</th>
+                    <th>Content</th>
+
+
+                </tr>
+                {%for i in lab %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.Laboratory_id.name}}</td>
+                   
+                    <td>{{i.description}}</td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+<br><br>
+<div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <th colspan=5><center> Patient Complaint</center></th>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+           
+                    <th>Content</th>
+                   
+
+                </tr>
+                {%for i in user %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.User_id.name}}
+                  
+                    <td>{{i.description}}</td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+</form>
+<br><br><br><br><br><br>
+{% endblock content %}
+</body>
+</html>

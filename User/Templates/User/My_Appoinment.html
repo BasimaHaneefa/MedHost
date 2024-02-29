@@ -1,0 +1,52 @@
+
+{% extends 'User/Head.html' %}
+{% load static %}
+<html>
+    <head>
+    <title>My Appointment</title>
+</head>
+        <body>
+        
+        {% block content %}
+<form method="post" enctype="multipart/form-data">
+    <br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">My Appointments</h1><br><br>
+    <br><br>  
+{% csrf_token %}
+<div id="tab">
+<table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+    <tr>
+     
+        <th>Slot No</th>
+        <th>Date</th>
+        <th>Doctor</th>
+        <th>Status</th>
+    </tr>
+    {% for i in res %}
+    <tr>
+        
+       
+           
+           <td>{{i.slot_id.slot_no}}</td>
+           <td>{{i.slot_id.slot_date}}</td>
+            <td>{{i.slot_id.doctor_id.name}}</td>
+            {% if i.status == 1%}
+            <td>Accepted | <a href="{% url 'user:paynow' i.id %}">View Prescription</a></td>
+            {% elif i.status == 2%}
+            <td>Rejected</td>
+            {% else %}
+            <td>Request Under Process</td>
+            {% endif %}
+
+          
+    </tr>
+        {%endfor%}
+</table>
+</div>
+    
+    <br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</form>
+</body>
+</html>
+{% endblock content %}

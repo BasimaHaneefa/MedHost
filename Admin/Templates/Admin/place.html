@@ -1,0 +1,46 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>Place Registration</title>
+    <body><br>
+        {% block content %}
+        
+        <form method="post">
+            {% csrf_token %}
+            <br><br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Place Registration</h1><br><br><br>
+            <div id="tab">
+                <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr><td>District</td>
+                    <td><Select name="district">
+                    <option>-----Select-----</option>
+                        {%for i in Dis%}
+                        <option value="{{i.id}}">{{i}}</option>
+                        {% endfor %}
+                     </select></tr>
+                    <tr><td>Place</td><td><input type="text" name="place" autocomplete="off" required=""></td></tr>
+                    <tr>
+                       <td align="center" colspan="2"><input type="submit" name="btn" value="Save">
+                       <input type="submit" name="btn" value="Cancel"></td>
+                    </tr>
+           </table>
+        </div>
+        <br><br><br><br>
+           <div id="tab">
+           <table border="1" align="center" cellpadding="10" width="400" height="300">
+        <tr><th>Sl.No</th><th>District</th><th>Place</th><th colspan=2 align="center">Action</th></tr>
+        {% for i in Plc%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.district}}</td>
+            <td>{{i.place}}</td>
+            <td><a href="{% url 'webadmin:Dlt_Place' i.id %}">Delete</a> |
+            <a href="{% url 'webadmin:Up_Place' i.id %}">Update</a></td>
+        </tr>
+        {% endfor%}
+        </table>
+    </div>
+        <br><br><br><br><br><br>
+        {% endblock content %}
+    </body>
+    </html>
+        

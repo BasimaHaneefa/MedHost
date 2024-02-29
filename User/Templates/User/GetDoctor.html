@@ -1,0 +1,33 @@
+
+
+<html>
+    <body>
+      
+        
+        <br><br>
+        <table align="center" cellpadding="50" style="border-collapse:collapse">    
+            <tr>
+                {%for i in Doc %}
+                <td>
+                    <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+                        <p><image src={{i.photo.url}} width="100px" height="100px"></p>
+                        <p>{{i.name}}</p>
+                        <p>{{i.contact}}</p>
+                        <p>{{i.email}}</p>
+                        <p>{{i.address}}</p>
+                        <p>{{i.gender}}</p>
+                        <p>{{i.department}}</p>
+                        <p>{{i.experience}}</p>
+                        <p><a href="{% url 'user:Appoinment' i.id %}">Appoinment</a></p>
+                    </div>
+                <td>
+                    {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            <tr>
+                    {% endif %}
+                    
+                {%endfor%}
+        </table><br><br>
+       
+    </body>
+</html>

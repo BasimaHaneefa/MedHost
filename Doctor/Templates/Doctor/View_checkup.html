@@ -1,0 +1,41 @@
+{% extends 'Doctor/Head.html' %}
+{% load static %}
+<html>
+    <title>View User checkup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        {% block content %}
+        <br><br><br>
+        <h2 align="center">VIEW CHECKUP RESULT</h2><br><br>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="tab">
+        <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr><td>SL.NO</td>
+                <td>User Name</td>
+                <td>Test Type</td>
+                <td>Test Name</td>
+                <td>Test Details</td>
+                <td>Checkup Result</td>
+                <td>Action</td>
+            </tr>
+            {% for i in sel %}
+            <tr>
+                <td>{{i.id}}</td> 
+                <td>{{i.appoinment_id.User_id.name}}
+                <td>{{i.test_id.testtype}}</td>
+                <td>{{i.test_id.name}}</td>
+                <td>{{i.test_id.test_details}}</td>
+                <td><img src={{i.checkup_result.url}} width="100px" height="100px"></td>
+                <td><a href="{% url 'doctor:checkprescription' i.id%}">Add Prescription</a></td>
+               
+                </tr>       
+            {% endfor %}
+            </table>
+        </div>
+        </form>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </body>
+    <html>
+        {% endblock content %}
+        

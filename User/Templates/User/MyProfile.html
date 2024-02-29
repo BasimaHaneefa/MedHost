@@ -1,0 +1,39 @@
+{% extends 'User/Head.html' %}
+{% load static %}
+<html>
+    <head>
+       <title>My Profile</title>
+    </head>
+        <body>
+            {% block content %}
+            
+            <br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">My Profile</h1><br><br>
+         <form method="post" enctype="multipart/form-data" id="UserForm" data-places-url="{% url 'guest:Ajax_Place' %}" >
+         {% csrf_token %}
+         <div id="tab">
+           <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+             <tr>
+                <td colspan=2 align="center"><image src={{seld.photo.url}} width="100px" height="100px" style="border-radius:50%"/></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{seld.name}} </td></tr>
+                <tr><td>Contact</td>
+                <td>{{seld.contact}}</tr>
+                </tr><td>Email</td>
+                <td>{{seld.email}}</tr>
+                <tr><td>Address</td>
+                <td>{{seld.address}}</tr>
+                <tr><td>Gender</td>
+                <td>{{seld.gender}}</tr>
+                <tr><td>Place</td>
+                <td>{{seld.place}}</tr>
+                    <tr><td colspan=2 align="center"><a href="{% url 'user:Up_Profile' seld.id%}">Edit Profile</a>
+                           <a href="{% url 'user:Change_pwd' seld.id%}">Change Password</a></td></tr>
+        </table>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </form>
+</body>
+</html>
+{% endblock content %}

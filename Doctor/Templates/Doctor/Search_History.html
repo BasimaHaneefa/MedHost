@@ -1,0 +1,96 @@
+{% extends 'Doctor/Head.html' %}
+{% load static %}
+
+<html><head>
+    <title>Search History</title>
+</head>
+<body>
+    <br>
+    {% block content %}<br><br><br>
+    <form method="post" align="center" id="SearchPatient" >
+        {% csrf_token %}
+        
+                <tr>
+                <td><input type="text" name="u_name" id="u_name" autocomplete="off" required="" style="width:200px;" style="width:200px;"></td>
+            </tr>
+               <tr>
+                <td><input type="submit" name="search" value="Search" id="saerch" style="width:100px;" style="width:100px;"></td>
+               </tr>
+               <br><br><br>
+               
+                {% if sel %}
+                <div id="tab">
+                <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                    <tr>
+                        <td>SL.NO</td>
+                        <td>Name</td>
+                        <td>Appoinment Date</td>
+                        
+                        <td>Test Type</td>
+                        <td>Test Name</td>
+                        <td>Test Details</td>
+                        <td>Checkup Result</td>
+                        <td>Prescription</td>
+                    </tr>
+                    {% for i in sel %}
+                    <tr>
+                        <td>{{i.id}}</td> 
+                        <td>{{i.appoinment_id.User_id.name}}</td>
+                        <td>{{i.appoinment_id.for_date}}
+                        <td>{{i.test_id.testtype}}</td>
+                        <td>{{i.test_id.name}}</td>
+                        <td>{{i.test_id.test_details}}</td>
+                        <td><img src={{i.checkup_result.url}} width="100px" height="100px"></td>
+                       
+                        <td>
+                            {% for j in pd %}
+                            <p>{{j.prescription_medicine}}</p>
+                            {% endfor %}
+                        </td>
+                      
+                    </tr>       
+                    {% endfor %}
+                    </table>
+                </div>
+                    {% endif %}
+
+                    {% if pr %}
+                    <div id="tab">
+                    <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                        <tr>
+                            <td>SL.NO</td>
+                            <td>Name</td>
+                            <td>Appoinment Date</td>
+                            <td>Prescription</td>
+                        </tr>
+                        {% for i in pr %}
+                        <tr>
+                            <td>{{i.id}}</td> 
+                            <td>{{i.appoinment_id.User_id.name}}</td>
+                            <td>{{i.appoinment_id.for_date}}
+                                <td>{{i.prescription_medicine}}</td>
+                        </tr>       
+                        {% endfor %}
+                        </table>
+                    </div>
+                        {% endif %}
+          
+</form><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#search").click(function () {
+            var did = $("#u_name").val();
+            var ur = $("#SearchPatient").attr("data-url");
+            $.ajax({
+                url: ur,    
+                data: { uname: did },
+                success: function (data) {
+                    $("#data").html(data);
+                },
+        });
+    });
+</script>
+{% endblock content %}

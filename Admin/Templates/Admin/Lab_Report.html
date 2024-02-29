@@ -1,0 +1,80 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+
+<html>
+    <title>Report</title>
+    <body>
+        {% block content %}<br>
+          <br><br><br><br><br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Report</h1><br><br><br>
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             
+                <div id="tab">
+             <table  align="center" colspan=4 cellpadding="10" style="border-collapse:collapse">
+                <tr><td>From Date</td>
+                <td><input type="date" name="from_date"></td>
+                <td>To Date</td>
+                <td><input type="date" name="to_date"></td>
+            </tr>
+
+            <tr>
+                <td align="center" colspan=4><input type="submit" name="btn" value="Show Result">
+                    
+                </td>
+             </tr>
+            </table>
+            {% if sel %}
+            <div id="pri">
+            <table border="1" align="center">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Test Name</th>
+                    <th>Test Type</th>
+                    <th>Doctor Name</th>
+                    <th>User Name</th>
+                    <th>Contact Info</th>
+                </tr>
+                {% for i in sel%}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                        {{i.test_id.name}}
+                    </td>
+                    <td>
+                        {{i.test_id.testtype}}
+                    </td>
+                    <td>
+                        {{i.appoinment_id.slot_id.doctor_id.name}}
+                    </td>
+                    <td>
+                        {{i.appoinment_id.User_id.name}}
+                    </td>
+                    <td>
+                        {{i.appoinment_id.User_id.contact}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <center><input type="button" onclick="printDiv('pri')" id="invoice-print"  class="btn btn-success" value="Print" /></center>
+            {% endif %}
+            
+        </form>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
+    </body>
+        </html>
+        <script>
+            function printDiv(divName) {
+                 var printContents = document.getElementById(divName).innerHTML;
+                 var originalContents = document.body.innerHTML;
+            
+                 document.body.innerHTML = printContents;
+            
+                 window.print();
+            
+                 document.body.innerHTML = originalContents;
+            }
+            </script>
+            {% endblock content %}

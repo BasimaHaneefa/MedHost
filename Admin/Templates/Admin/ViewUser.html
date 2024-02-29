@@ -1,0 +1,51 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>View User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        {% block content %}
+        <br><br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">View Patient Registration</h1><br><br><br>
+        <form method="post">
+            {% csrf_token %}
+            <div id="tab">  
+        <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr>
+                <td>Sl.No</td>
+                <td>Name</td>
+                <td>Contact</td>
+                <td>Address</td>
+                <td>Email</td>
+                <td>Gender</td>
+                <td>Place</td>
+                <td>Photo</td>
+                <td>Proof</td>
+                <td>Date of Joining</td>
+                <td>Status</td>
+            </tr>
+            {%for i in seld %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.name}}</td> 
+                <td>{{i.contact}}
+                <td>{{i.address}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.gender}}</td>
+                <td>{{i.place}}</td>
+                <td><image src={{i.photo.url}} width="100px" height="100px"/></td>
+                <td><a href="{{i.proof.url}}"><i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i></a></td>
+                <td>{{i.rg_date}}</td>
+                <td align="center" colspan=2><a href="{% url 'webadmin:Accept_User' i.id %}">Accept</a>
+                <a href="{% url 'webadmin:Reject_User' i.id %}">Reject</a></td>
+            </tr>       
+                {%endfor%}
+
+            </table>
+
+        </div>
+        </form>
+        <br><br><br><br><br><br>
+        {% endblock content %}
+    </body>
+    <html>
+        

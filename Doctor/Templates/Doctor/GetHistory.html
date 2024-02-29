@@ -1,0 +1,41 @@
+
+
+<html>
+    <title>Patient History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;"> History Of Patient</h1><br>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div id="tab">
+        <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr>
+                <td>SL.NO</td>
+                <td>Name</td>
+                <td>Appoinment Date</td>
+                <td>User Name</td>
+                <td>Test Type</td>
+                <td>Test Name</td>
+                <td>Test Details</td>
+                <td>Checkup Result</td>
+                <td>Prescription</td>
+            </tr>
+            {% for i in sel %}
+            <tr>
+                <td>{{i.id}}</td> 
+                <td>{{i.appoinment_id.User_id.name}}</td>
+                <td>{{i.appoinment_id.for_date}}
+                <td>{{i.test_id.testtype}}</td>
+                <td>{{i.test_id.name}}</td>
+                <td>{{i.test_id.test_details}}</td>
+                <td><img src={{i.checkup_result.url}} width="100px" height="100px"></td>
+            </tr>       
+            {% endfor %}
+            </table>
+        </div>
+        </form>
+      
+    </body>
+    <html>
+        

@@ -1,0 +1,55 @@
+{% extends 'Doctor/Head.html' %}
+{% load static %}
+<html>
+    <title>Checkup Details</title>
+    <body>
+        {% block content %}
+        <br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Add Checkup Details</h1><br>
+            <form method="post" enctype="multipart/form-data" id="Check_Up" data-tdetails-url="{% url 'doctor:Ajax_checkup' %}">
+             {% csrf_token %}
+             <div id="tab">
+             <table border="2" align="center" cellpadding="10" style="border-collapse:collapse">
+
+                    <tr><td>Test Type</td>
+                    <td><Select name="testtype" id="ttype">
+                        <option>------select------</option>
+                        {%for i in TT %}
+                        <option value="{{i.id}}">{{i}}</option>
+                        {% endfor %}
+ 
+                    </select></tr>
+                    <tr><td>Test Details</td>
+                        <td><Select name="test_details" id="tdetails">
+                            <option>------select------</option>
+                        </select></tr>
+                        <tr><td>Checkup Details</td>
+                            <td><textarea name="details" autocomplete="off" required=""></textarea></td></tr>
+
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" name="btn" value="Save">
+                    <input type="submit" name="btn" value="cancel"></td>
+                 </tr>
+            </table>
+        </div>
+        </form>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#ttype").change(function () {
+            var tid = $(this).val();
+            //alert(did);
+            var ur = $("#Check_Up").attr("data-tdetails-url");
+            $.ajax({
+                url: ur,
+                data: { testd: tid, },
+                success: function (data) {
+                    $("#tdetails").html(data);
+                },
+            });
+        });
+</script>
+    </body>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </html>
+    {% endblock content %}

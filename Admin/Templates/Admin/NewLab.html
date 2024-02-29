@@ -1,0 +1,66 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>New Lab Registration</title>
+    <body><br>
+        {% block content %}
+        <br><br><br><br><br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Laboratory  Registration</h3><br><br><br>
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <div id="tab">
+             <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$"autocomplete="off" required=""></td></tr>
+                    <tr><td>Contact</td>
+                    <td><input type="text" name="contact" placeholder="0123456789" pattern="[0-9]{10}" autocomplete="off" required=""></td></tr>
+                    </tr><td>Email</td>
+                    <td><input type="email" name="email" pattern="[^ @]*@[^ @]*" placeholder="Enter Email" autocomplete="off" required=""></td></tr>
+                    <tr><td>Address</td>
+                    <td><textarea name="address" rows="4" cols="40"autocomplete="off" required=""></textarea></td></tr>
+                    <tr><td>Logo</td>
+                    <td><input type="file" name="image"></td></tr>
+                    <tr><td>Password</td>
+                    <td><input type="password" name="password" placeholder="Enter password"  autocomplete="off" required=""></td></tr>
+                    <tr><td>Confirm Password</td>
+                    <td><input type="password" name="confirmpass" placeholder="Re-enter password" autocomplete="off" required=""></td></tr>
+                </tr>
+                <tr>
+                    <td colspan=2 align="center"><input type="submit" name="btn" value="Register">
+                    <input type="submit" name="btn" value="Cancel"></td>
+                 </tr>
+            </table>
+        </div>
+            <br><br>
+            <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse" height="200" width="800">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Logo</th>
+                    <th>Date of Joining</th>
+                    <th>Action</th>
+                </tr>
+                {%for i in lab %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.address}}</td>
+                    <td><image src={{i.photo.url}} width="100px" height="100px"></td>
+                    <td>{{i.doj}}</td>
+                    <td><a href="{% url 'webadmin:Dlt_lab' i.id %}">Delete</a></td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+        </form>
+        <br><br><br><br><br><br>
+        {% endblock content %}
+    </body>
+    </html>

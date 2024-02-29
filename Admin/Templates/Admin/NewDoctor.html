@@ -1,0 +1,97 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>Doctor Registration</title>
+    <body><br>
+        {% block content %}
+        <br><br><br><br><br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Doctor Registration</h3><br><br><br>
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             
+                <div id="tab">
+             <table border="2" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" autocomplete="off" required=""></td></tr>
+                    <tr><td>Contact</td>
+                    <td><input type="text" name="contact" placeholder="0123456789" pattern="[0-9]{10}" autocomplete="off" required=""></td></tr>
+                    </tr><td>Email</td>
+                    <td><input type="email" name="email" pattern="[^ @]*@[^ @]*" placeholder="Enter Email" autocomplete="off" required=""></td></tr>
+                    <tr><td>Address</td>
+                    <td><textarea name="address" rows="4" cols="40" autocomplete="off" required=""></textarea></td></tr>
+                    <tr><td>Gender</td>
+                    <th><center>
+                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="female">Female
+                        <input type="radio" name="gender" value="Others">Others
+                        </center></th>
+                    </tr>
+                    <tr><td>Department</td>
+                    <td><Select name="department" required="">
+                        <option>------select------</option>
+ 
+                        {%for i in dep%}
+                        <option value="{{i.id}}">{{i}}</option>
+                        {% endfor %}
+                    </select></tr>
+                    <tr><td>Photo</td>
+                    <td><input type="file" name="image"></td></tr>
+                    <tr><td>Experience</td>
+                    <td><input type="text" name="experience" autocomplete="off" required=""></td></tr>
+                    <tr><td>Password</td>
+                    <td><input type="password" name="password" placeholder="Enter password" autocomplete="off" required=""></td></tr>
+                    <tr><td>Confirm Password</td>
+                    <td><input type="password" name="confirmpass"  placeholder="Re-enter password"  autocomplete="off" required=""></td></tr>
+                </tr>
+                <tr>
+                    <td align="center" colspan=2><input type="submit" name="btn" value="Register">
+                        <input type="submit" name="btn" value="Cancel">
+                    </td>
+                 </tr>
+            </table>
+        </div>
+            <br><br>
+            <div id="tab">
+               
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse" height="500" width="1300">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>Photo</th>
+                    <th>Department</th>
+                    <th>Experience</th>
+                    <th>Date of Joining</th>
+                    <th><center>Action</center></th>
+                    
+                </tr>
+                {%for i in doc %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.gender}}</td>
+                    <td><image src={{i.photo.url}} width="100px" height="100px"></td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.experience}}</td>
+                    <td>{{i.doj}}</td>
+                    <td><a href="{% url 'webadmin:Dlt_doctor' i.id %}">Delete</a> |
+                    <a href="{% url 'webadmin:Slots'  i.id %}">Add Slots</a></td>
+                </tr>
+                {%endfor%}
+            </table>
+        
+            <div>
+
+        </form>
+        <br><br><br><br><br><br>
+        {% endblock content %}
+    </body>
+    
+    </html>

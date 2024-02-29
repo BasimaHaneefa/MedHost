@@ -1,0 +1,35 @@
+
+{% extends 'User/Head.html' %}
+{% load static %}
+<html>
+    <title>View Prescription</title>
+    <body>
+        {% block content %}
+        <br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">View Prescription</h1><br>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div id="tab">
+               <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <tr>
+                    
+                    <td>Date</td>
+                  
+                    <td>Doctor Name</td>
+                  <td>Prescription Medicine</td>
+                </tr>
+                {%for i in seld %}
+                <tr>
+                    <td>{{i.prescription_date}}</td>
+                 
+                    <td>{{i.appoinment_id.slot_id.doctor_id.name}}</td>
+                    <td>{{i.prescription_medicine}}</td>
+                </tr>       
+                    {%endfor%}
+</table>
+</div>
+           
+        </form><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </body>
+</html>
+{% endblock content %}

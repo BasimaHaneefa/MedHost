@@ -1,0 +1,24 @@
+{% extends 'Laboratory/Head.html' %}
+{% load static %}
+<html>
+    <title>Checkup Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        {% block content %}
+        <br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Upload Checkup Result</h1><br>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="tab">
+        <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr><td>Checkup Result</td>
+                <td><input type="file" name="checkup_result"></td></tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" name="btn" value="Save">
+                    <input type="submit" name="btn" value="cancel"></td>
+                 </tr>
+        </table>
+    </div>
+    </form><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+<html>
+    {% endblock content %}

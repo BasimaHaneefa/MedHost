@@ -1,0 +1,68 @@
+
+{% extends 'User/Head.html' %}
+{% load static %}
+<html>
+    <title>Search Doctor</title>
+    <body>
+        {% block content %}
+        <br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">SEARCH DOCTOR</h1><br><br>
+            <form method="post" enctype="multipart/form-data" id="SearchDoctor" data-url="{% url 'user:GetDoctor' %}">
+             {% csrf_token %}
+             <div id="tab">
+             <table  align="center" cellpadding="10" style="border-collapse:collapse">
+
+                <tr><td>Department</td>
+                    <td><Select name="department" id="dept">
+                        <option>------select------</option>
+ 
+                        {%for i in dep%}
+                        <option value="{{i.id}}">{{i}}</option>
+                        {% endfor %}
+                    </select></tr>
+            </table>
+        </div>
+            <br>
+            <div id="data">
+            <table align="center" cellpadding="50" style="border-collapse:collapse">    
+                <tr>
+                    {%for i in seld %}
+                    <td>
+                        <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+                            <p><image src={{i.photo.url}} width="100px" height="100px"></p>
+                            <p>{{i.name}}</p>
+                            <p>{{i.contact}}</p>
+                            <p>{{i.email}}</p>
+                            <p>{{i.address}}</p>
+                            <p>{{i.gender}}</p>
+                            <p>{{i.department}}</p>
+                            <p>{{i.experience}}</p>
+                            <p><a href="{% url 'user:Appoinment' i.id %}">Appoinment</a></p>
+                        </div>
+                    <td>
+                        {% if forloop.counter|divisibleby:4 %}
+                </tr>
+                <tr>
+                        {% endif %}
+                        
+                    {%endfor%}
+            </table><br><br>
+        </div>
+        </form>
+        
+    </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#dept").change(function () {
+            var did = $(this).val();
+            var ur = $("#SearchDoctor").attr("data-url");
+            $.ajax({
+                url: ur,
+                data: { department: did },
+                success: function (data) {
+                    $("#data").html(data);
+                },
+            });
+        });
+    </script>
+    {% endblock content %}

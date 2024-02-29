@@ -1,0 +1,32 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>Edit Place</title>
+    <body>
+        {% block content %}
+        <br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Edit Place</h1><br>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div id="tab">
+        <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr><td>District</td>
+                <td><Select name="district">
+                    
+                    <option>{{selp.district}}</option>
+{%for i in Dis%}
+<option value="{{i.id}}">{{i}}</option>
+{% endfor %}
+
+            </select>
+            </tr>
+            <tr><td>Place</td><td><input type="text" name="place" value="{{selp.place}}" autocomplete="off" required=""></td></tr>
+            <tr><td align="center" colspan=2><input type="submit" name="btn" value="Save">
+                <input type="submit" name="btn" value="Cancel"></td></tr>
+                <div>
+                </table>
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    {% endblock content %}
+    </body>
+    </html>

@@ -1,0 +1,102 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>View Complaint</title>
+    <body>
+        {% block content %}
+        <br>
+        <br><br><br>
+        <h1 align="center">View Complaint</h1><br>
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}<br><br>><br><br><br>
+             <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <th colspan=5> Doctor Complaint</th>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th><center>Action</center></th>
+
+                </tr>
+                {%for i in seld %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.Doctor_id.name}}</td>
+                    <td>{{i.title}}</td>
+                    <td>{{i.content}}</td>
+                    <td>
+                        {% if i.c_status == 0 %}
+                        <p><a href="{% url 'webadmin:reply' i.id%}">Reply</a></p>
+                        {% else %}
+                        <p>Replied</p>
+                        {% endif %}
+                    </td> 
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+            <br><br>
+            <div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <th colspan=5> Laboratory Complaint</th>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Action</th>
+
+                </tr>
+                {%for i in lab %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.Laboratory_id.name}}</td>
+                    <td>{{i.title}}</td>
+                    <td>{{i.content}}</td>
+                    <td>
+                        {% if i.c_status == 0 %}
+                        <p><a href="{% url 'webadmin:reply' i.id%}">Reply</a></p>
+                        {% else %}
+                        <p>Replied</p>
+                        {% endif %}
+                    </td> 
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+<br><br>
+<div id="tab">
+            <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                <th colspan=5><center> Patient Complaint</center></th>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Action</th>
+
+                </tr>
+                {%for i in user %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.User_id.name}}
+                    <td>{{i.title}}</td>
+                    <td>{{i.content}}</td>
+                    <td>
+                        {% if i.c_status == 0 %}
+                        <p><a href="{% url 'webadmin:reply' i.id%}">Reply</a></p>
+                        {% else %}
+                        <p>Replied</p>
+                        {% endif %}
+                    </td> 
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+</form>
+<br><br><br>><br><br><br>
+{% endblock content %}
+</body>
+</html>

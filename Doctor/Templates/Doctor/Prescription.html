@@ -1,0 +1,26 @@
+{% extends 'Doctor/Head.html' %}
+{% load static %}
+<html>
+    <title>Prescription</title>
+    <body>
+        {% block content %}
+        <br><br>
+        <h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Add Prescription</h1><br>
+            <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+                
+                <tr><td>Prescription</td>
+    <td><textarea name="prescription" autocomplete="off" required=""></textarea></td></tr>
+    <tr>
+        <td colspan=2 align="center"><input type="submit" name="btn" value="Save">
+            <input type="submit" name="btn" value="Cancel"></td>
+     </tr>
+</table>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}
+
+</form>
+
+</body>
+</html>

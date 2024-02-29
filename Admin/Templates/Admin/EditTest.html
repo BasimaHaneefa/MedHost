@@ -1,0 +1,26 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+<html>
+    <title>Edit Test</title>
+    <body>
+        {% block content %}
+        <br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Edit Test Type</h1><br><br>
+        <form method="post">
+            {% csrf_token %}
+            <div id="tab">
+                 <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr>
+                <td>Test Type</td><td><input type="text" name="testtype" autocomplete="off" required="" value="{{ Etst.testtype }}"></td>
+            </tr>
+            <tr>
+                <td colspan=2 align="center"><input type="submit" name="btn" value="Save">
+                <input type="submit" name="btn" value="Cancel"></td>
+            </tr>
+        </table>
+    </div>
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    {% endblock content %}
+</body>
+<html>
+    

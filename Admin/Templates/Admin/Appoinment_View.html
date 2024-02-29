@@ -1,0 +1,43 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+
+<html>
+    {% block content %}
+    <title>View Appoinment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <br><br><br><br><br><br><h1 align="center" style="color: 0F172B; font-weight: bold; font-style: inherit; font-family: 'Times New Roman',Times, seif;">Appointment View</h1><br><br><br>
+            <div id="tab">
+        <table border="1" align="center" cellpadding="10" style="border-collapse:collapse">
+            <tr>
+                <td>Sl.No</td>
+                <td>User Name</td>
+                <td>Appoinment Date</td>
+                <td>Doctor Name</td>
+                <td>Slot Number</td>
+                <td align="center" colspan=2>Status</td>
+            </tr>
+            {%for i in seld %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.User_id.name}}</td> 
+                <td>{{i.for_date}}
+                <td>{{i.slot_id.doctor_id.name}}</td>
+                <td>{{i.slot_id.slot_no}}</td>
+                <td colspan="2"><a href="{% url 'webadmin:Accept_Appoinment' i.id %}">Accept</a> |
+                <a href="{% url 'webadmin:Reject_appoinment' i.id %}">Reject</a></td>
+                
+
+                </tr>       
+                {%endfor%}
+
+            </table>
+        </div>
+        </form>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        {% endblock content %}
+    </body>
+    <html>
+        
